@@ -15,7 +15,7 @@ USAGE:
     sections = [
         {"kind": "heading", "text": "SUMMARY"},
         {"kind": "paragraph", "text": "Career-switching technologist..."},
-        {"kind": "bullets", "items": [("Languages: ", "Indonesian (Native)"), ...]},
+        {"kind": "bullets", "items": [("Languages: ", "English (Native)"), ...]},
         {"kind": "entries", "entries": [
             ("Example Logistics Co. — Driver", "2025 – Present", ["Bullet one", "Bullet two"]),
         ]},
@@ -188,8 +188,8 @@ def build_docx(path, name, contact, sections):
         elif kind == "paragraph":
             parts.append(_body(s["text"]))
         elif kind == "bullets":
-        for pre, txt in s["items"]:
-            parts.append(_list_item(txt, bold_prefix=pre or None))
+            for pre, txt in s["items"]:
+                parts.append(_list_item(txt, bold_prefix=pre or None))
         elif kind == "entries":
             for title, date, bullets in s["entries"]:
                 parts.append(_entry(title, date))
@@ -211,10 +211,13 @@ def build_docx(path, name, contact, sections):
 
 
 if __name__ == "__main__":
-    # Demo: reproduces the resume used to validate this generator.
+    # Demo: exercises every section kind this generator supports.
+    # ⚠️ DEMO DATA MUST STAY FICTIONAL. This file ships in a public skill repo.
+    # Never paste a real name, email, phone, employer, school, or city here —
+    # git history preserves PII permanently, even after a later "fix" commit.
     demo_sections = [
         {"kind": "heading", "text": "SUMMARY"},
-        {"kind": "paragraph", "text": "Career-switching technologist pivoting from leadership and event management into AI-agent and workflow automation."},
+        {"kind": "paragraph", "text": "Career-switching technologist moving from operations into AI-agent and workflow automation."},
         {"kind": "heading", "text": "SKILLS"},
         {"kind": "bullets", "items": [
             ("Languages: ", "English (Native), Spanish (B2)"),
@@ -222,19 +225,21 @@ if __name__ == "__main__":
         ]},
         {"kind": "heading", "text": "PROFESSIONAL EXPERIENCE"},
         {"kind": "entries", "entries": [
-            ("Example Logistics Co. — Motorcycle Delivery Driver (Freelance)", "2025 – Present", [
-                "Maintain a 5-star service rating across 500+ completed jobs.",
-                "Reliably meet tight delivery windows in a high-traffic urban environment.",
+            ("Example Logistics Co. — Delivery Driver (Freelance)", "2025 – Present", [
+                "Maintained a 5-star service rating across 500+ completed jobs.",
+                "Reliably met tight delivery windows in a high-traffic urban environment.",
             ]),
         ]},
         {"kind": "heading", "text": "EDUCATION & TRAINING"},
         {"kind": "entries", "entries": [
-            ("State University — Landscape Architecture (incomplete)", "2023 – 2024", [
-                "Self-directed study: CS50x, CS50AI (HarvardX).",
+            ("State University — B.Sc. Design (incomplete)", "2023 – 2024", [
+                "Self-directed study: open online CS coursework.",
             ]),
         ]},
     ]
     out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "demo_resume.docx")
+    # NOTE: demo data below is entirely fictional. Never commit real personal
+    # contact details, names, employers, or institutions to a public repo.
     build_docx(out, "Jane Q. Example",
                "Anytown, USA | jane.example@example.com | linkedin.com/in/janeexample",
                demo_sections)

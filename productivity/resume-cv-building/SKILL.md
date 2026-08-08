@@ -88,6 +88,26 @@ If the draft risks spilling to page 2, tighten in this order (all ATS-safe, prov
 - **Verify parsing before sending:** extract the rendered text (or run the plain-text test, ats-best-practices §7) and confirm section headings, dates, and JD keywords survive linearly with no jumbled order. Also confirm the file isn't blank (pdf-generation verification step) — the empty-page failure mode is silent.
 
 ## Pitfalls
+- **🔴 NEVER put the user's real resume data in demo/example/test code.** This is the single
+  highest-consequence pitfall in this skill. Resume work is *made of* PII — full name, email,
+  phone, LinkedIn, employer, university, city, biography. When you write a demo block, a
+  `__main__` sample, a docstring example, or a reference recipe, it is dangerously natural to
+  paste the real resume you just built. If that file is ever committed to a public repo, the
+  user is deanonymized — permanently, because git history preserves it even after deletion.
+  **Always use obviously-fictional placeholders:** `Jane Q. Example`,
+  `jane.example@example.com`, `+1 555-0100`, `Anytown, USA`, `Example Logistics Co.`,
+  `State University`. Add a comment saying the demo data is fictional and must stay that way.
+  *(Happened live: real name, gmail, LinkedIn handle, employer, university and two phone numbers
+  reached a public GitHub repo through demo blocks in `generate_ooxml_docx.py`,
+  `pdf-resume-builder/references/build_resume.py`, and
+  `pdf-generation/references/insert_htmlbox_recipe.py`.)*
+- **Sibling resume/PDF skills share the contamination.** If you find real PII in one resume-related
+  script, immediately grep **all** resume/PDF/document skills for the same name, email, phone,
+  employer and school — the same demo block gets copy-pasted between them. Fixing one file and
+  declaring victory leaves the rest exposed.
+- **Verify redaction by generating the artifact, not by reading the source.** After scrubbing,
+  actually run the generator and inspect the *output* (for .docx: unzip and grep
+  `word/document.xml`) for the old strings. Source-level grep misses PII assembled at runtime.
 - A weak Experience section is normal for switchers — compensate with a robust Projects section, not fabrication.
 - Verify the generated PDF isn't blank (see pdf-generation verification step) — the empty-page failure mode is silent.
 - **Research claims before asserting them.** When the user asks "is X still good practice?" / "research it first," do NOT answer from memory — web-search multiple sources and synthesize before giving a recommendation (done live for the "summary still useful?" question; research showed summary is recommended for career-changers / as an ATS keyword slot, optional otherwise, never a buzzword wall).
