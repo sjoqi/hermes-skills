@@ -1,0 +1,18 @@
+# Pin a version for clients (e.g. 2.8.4). 'stable' = latest stable, fine for learning.
+N8N_VERSION=stable
+
+# IMPORTANT: usernames MUST be lowercase-only (Postgres folds identifiers to lowercase
+# on create, but n8n sends the env var verbatim -> auth fails if mixed-case).
+POSTGRES_USER=CHANGE_TO_LOWERCASE
+POSTGRES_PASSWORD=CHANGE_ME_STRONG
+POSTGRES_DB=n8n
+
+POSTGRES_NON_ROOT_USER=CHANGE_TO_LOWERCASE
+POSTGRES_NON_ROOT_PASSWORD=CHANGE_ME_STRONG
+
+RUNNERS_AUTH_TOKEN=CHANGE_ME_STRONG
+
+# === hardening (official .env omits these) ===
+# Generate: openssl rand -base64 48  -> back this up separately (decrypts stored creds)
+N8N_ENCRYPTION_KEY=REPLACE_WITH_openssl_rand_base64_48
+GENERIC_TIMEZONE=Asia/Jakarta
