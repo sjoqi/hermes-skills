@@ -2,7 +2,7 @@
 
 Worked example for `buyer-demand-validation`. Concept under test: no-camera WiFi CSI sensing
 (presence / motion / breathing) sold to hotels, STR, landlords, senior living.
-Full output doc was written to `/Users/you/wifi-sensing-demand-findings.md`.
+Full output doc was written to `/Users/<you>/wifi-sensing-demand-findings.md`.
 
 All figures below carry the source that was actually fetched. Re-verify prices before reuse —
 vendor pricing pages change.

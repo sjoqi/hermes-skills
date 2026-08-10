@@ -31,8 +31,17 @@ this to the user in your first reply, before the agents return. **First-hand evi
 any web-sourced market claim.**
 
 Also check for **existing sibling skills before creating a new one** — the first version of this
-skill was created without that check and overlapped three existing research skills. Apply Step 0
-to yourself, not just the research.
+skill was created without that check and overlapped three existing research skills
+(`buyer-demand-validation`, `market-research-scrape-synthesis`, `demand-signal-mining`), one of
+which was *richer* and already carried that session's lessons. Run `skills_list()` and read the
+near-neighbours **before drafting**, not after. The tell that you skipped it: you are writing a
+section that feels familiar — it is.
+
+When overlap exists, do not merge into one giant skill. Split **orchestrator vs. method**: keep
+only what is genuinely new here and defer explicitly ("load `<sibling>` before writing that
+brief — do not re-derive it"). Each skill then has one job and they cannot drift apart.
+
+Apply Step 0 to yourself, not just the research.
 
 ## Step 1 — Dispatch three parallel lanes
 Always three, always one `delegate_task` call with a `tasks` array (no top-level `goal`).
@@ -92,3 +101,5 @@ Then **update `product-brainstorm/INDEX.md`**: bump `_Last updated:_` and add th
   optional third wheel. Platform policy alone (e.g. Airbnb's indoor-device ban) can close a
   whole channel independent of law.
 - Don't push third-party installed skills as your own work; check authorship, not file mtime.
+  If publishing skills to a public repo comes up, load `repo-pii-audit-and-remediation` —
+  research folders and skill demo blocks both leak PII.

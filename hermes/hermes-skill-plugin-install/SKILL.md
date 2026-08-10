@@ -100,3 +100,10 @@ already ships pyyaml 6.x, so most plugin deps are satisfied.
 - **Pre-copying skills then installing the plugin**: the plugin's `_install_skills`
   skips dirs that already exist, so your manual copy wins (fine, but keep them
   identical).
+- **Installed ≠ authored.** Skills installed via these paths have a *recent mtime* but
+  are third-party work. Never republish them as the user's own — see
+  `publishing-skills-to-public-repo` before pushing `~/.hermes/skills` anywhere public.
+
+## Related skills
+- `publishing-skills-to-public-repo` — the opposite direction: pushing skills OUT to a
+  public GitHub repo, with PII screening and leak incident response.
