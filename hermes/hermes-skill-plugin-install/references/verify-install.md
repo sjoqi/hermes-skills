@@ -13,9 +13,9 @@ tools/hooks count (e.g. `tools=2, hooks=3`).
 ## 2. Definitive load check (loads the real PluginManager)
 Run via Hermes's venv Python so you hit the same code the agent uses:
 ```bash
-/Users/jox/.hermes/hermes-agent/venv/bin/python - <<'PY'
+/Users/<you>/.hermes/hermes-agent/venv/bin/python - <<'PY'
 import sys
-sys.path.insert(0, "/Users/jox/.hermes/hermes-agent")
+sys.path.insert(0, "/Users/<you>/.hermes/hermes-agent")
 from hermes_cli.plugins import PluginManager
 pm = PluginManager()
 pm.discover_and_load()
@@ -32,7 +32,7 @@ omh | enabled=True | tools=['omh_gather_evidence', 'omh_state'] | hooks=['pre_ll
 
 ## 3. Skill tree sanity (auto-discovery path)
 ```bash
-/Users/jox/.hermes/hermes-agent/venv/bin/python - <<'PY'
+/Users/<you>/.hermes/hermes-agent/venv/bin/python - <<'PY'
 from pathlib import Path
 base = Path.home() / ".hermes" / "skills"
 omh = sorted(p.parent.name for p in base.rglob("SKILL.md") if p.parent.name.startswith("omh-"))
