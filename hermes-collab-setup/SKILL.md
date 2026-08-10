@@ -44,12 +44,28 @@ Each step's output feeds the next. Roles: human = strategic architect; Hermes
    profiles needed; subagents spawned internally by Hermes).
 5. **Verify**: `skill_view` each new skill returns `readiness_status: available`.
 
+## Principles (enforced after the first build)
+- **Fetch the real source before adapting.** When adapting an external
+  system/skill (e.g. Matt Pocock's `skills`), pull the ACTUAL source files and
+  adapt them faithfully — do NOT reconstruct from docs or a summary. The user
+  explicitly caught a from-scratch reconstruction and asked to fetch-and-adapt
+  instead. Source fidelity > reconstruction.
+- **Dry-run the chain before declaring done.** Skills that `skill_view` as
+  "available" can still have defects. Exercise the full chain (grill → spec →
+  tickets → one TDD ticket → code-review) on a throwaway repo. This caught a real
+  bug: `git tag checkpoint-working` errors on a duplicate tag (it already exists
+  from repo init) — the fix is `git tag -f checkpoint-working`.
+- **Mitigate with offsite backup.** Push Home Base + custom skills to GitHub as
+  two repos (no secrets — `.env` gitignored). Add a weekly cron running a sync
+  script so the backup stays live. Backup script: `~/.hermes/scripts/backup-hermes.sh`.
+
 ## Pitfalls
 - Don't overbuild "CI/CD" infrastructure — Hermes isn't that; files + skills
   are the real environment.
 - Never store secrets in the Home Base or memory; key in chmod-600 `.env`.
-- The checkpoint rule is sacred: git commit + tag `checkpoint-working` before
-  ANY change to a working build.
+- The checkpoint rule is sacred: `git commit` + `git tag -f checkpoint-working`
+  (force-move — the tag already exists from init, so plain `git tag` errors on
+  duplicate) before ANY change to a working build.
 - Keep the playbook editable — review/extend it per project, don't freeze it.
 
 ## Verification
